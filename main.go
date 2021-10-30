@@ -1,24 +1,48 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
+
+const n = 5
 
 func main() {
-	arr := []int{5, 2, 4, 6, 1, 3}
-	fmt.Println(insertionSort(arr))
+	arr20 := [n]int{1, 0, 1, 0, 0} // 20
+	arr24 := [n]int{1, 0, 1, 1, 0} // 22
+	fmt.Println(convertTo10(bitSum(arr20, arr24)))
 }
 
-func insertionSort(a []int) []int {
-	if len(a) < 2 {
-		return a
-	}
-	for j := 1; j < len(a); j++ {
-		key := a[j]
-		i := j - 1
-		for i >= 0 && a[i] > key { // a[i] < key in case of descending
-			a[i+1] = a[i]
-			i--
+func bitSum(f, s [n]int) [n + 1]int {
+	var result [n + 1]int
+
+	for i := n; i > 0; i-- {
+		if f[i-1] == 1 && s[i-i] == 1 {
+			if result[i] == 1 {
+				result[i-1] = 1
+				continue
+			} else {
+				result[i] = 0
+				result[i-1] = 1
+			}
+		} else if f[i-1] == 1 || s[i-1] == 1 {
+			if result[i] == 1 {
+				result[i-1] = 1
+				result[i] = 0
+				continue
+			}
+			result[i] = 1
 		}
-		a[i+1] = key
 	}
-	return a
+	return result
+}
+
+func convertTo10(a [n + 1]int) int {
+	var res int
+	for k, v := range a {
+		if v == 1 {
+			res += int(math.Pow(2.0, float64(len(a)-k-1)))
+		}
+	}
+	return res
 }
