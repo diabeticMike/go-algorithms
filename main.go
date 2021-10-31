@@ -1,10 +1,14 @@
 package main
 
 import (
+	"fmt"
 	"math"
 )
 
 func main() {
+	a := []int{1, 0, 1, 0, 0}
+	b := []int{1, 1, 0, 0, 0}
+	fmt.Println(bitSum2(a, b))
 }
 
 func bitSum(f, s []int) []int {
@@ -26,6 +30,25 @@ func bitSum(f, s []int) []int {
 			}
 			result[i] = 1
 		}
+	}
+	return result
+}
+
+func bitSum2(a, b []int) []int {
+	result := make([]int, len(a)+1)
+	s := 0
+	for i, j := len(a)-1, len(b)-1; i >= 0 || j >= 0 || s == 1; {
+
+		if i >= 0 {
+			s += a[i]
+		}
+		if j >= 0 {
+			s += b[j]
+		}
+		result[i+1] = s % 2
+		s /= 2
+		i--
+		j--
 	}
 	return result
 }
