@@ -1,4 +1,4 @@
-package main
+package second
 
 import (
 	"fmt"
@@ -20,8 +20,8 @@ func Test_BitSum(t *testing.T) {
 			b = make([]int, len(a)-len(b))
 			b = append(b, tmp...)
 		}
-		if i+n-i != convertTo10(bitSum(a, b)) {
-			log.Fatal(i+n-i, "  ", convertTo10(bitSum(a, b)))
+		if i+n-i != convertTo10(BinSum(a, b)) {
+			log.Fatal(i+n-i, "  ", convertTo10(BinSum(a, b)))
 		}
 	}
 	fmt.Println("SUCCESS")
@@ -41,8 +41,8 @@ func Benchmark_BitSum(b *testing.B) {
 				b = make([]int, len(a)-len(b))
 				b = append(b, tmp...)
 			}
-			if i+n-i != convertTo10(bitSum(a, b)) {
-				log.Fatal(i+n-i, "  ", convertTo10(bitSum(a, b)))
+			if i+n-i != convertTo10(BinSum(a, b)) {
+				log.Fatal(i+n-i, "  ", convertTo10(BinSum(a, b)))
 			}
 		}
 	}
@@ -62,8 +62,8 @@ func Benchmark_BitSum2(b *testing.B) {
 				b = make([]int, len(a)-len(b))
 				b = append(b, tmp...)
 			}
-			if i+n-i != convertTo10(bitSum2(a, b)) {
-				log.Fatal(i+n-i, "  ", convertTo10(bitSum2(a, b)))
+			if i+n-i != convertTo10(BinSum2(a, b)) {
+				log.Fatal(i+n-i, "  ", convertTo10(BinSum2(a, b)))
 			}
 		}
 	}
