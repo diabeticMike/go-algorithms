@@ -7,7 +7,6 @@ import (
 )
 
 func main() {
-	a := []int{1, 0, 1, 0, 0}
-	b := []int{1, 1, 0, 0, 0}
-	fmt.Println(second.BinSum2(a, b))
+	a := []int{3, 4, 2, 5, 1}
+	fmt.Println(second.SelectionSort(a))
 }
