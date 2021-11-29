@@ -47,7 +47,7 @@ func BinSum2(a, b []int) []int {
 }
 
 func convertTo2(in int) []int {
-	out := make([]int, 0, 0)
+	out := make([]int, 0)
 	for {
 		out = append(out, in%2)
 		in /= 2

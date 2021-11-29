@@ -1,0 +1,57 @@
+# Inspect exported functions, default is false. Set to true if no external program/library imports your code.
+# XXX: if you enable this setting, unparam will report a lot of false-positives in text editors:
+# if it's called for subdir of a project it can't find external interfaces. All text editor integrations
+# with golangci-lint call it on a directory with the changed file.
+check-exported: false
+unused:
+  # treat code as a program (not a library) and report unused exported identifiers; default is false.
+  # XXX: if you enable this setting, unused will report a lot of false-positives in text editors:
+  # if it's called for subdir of a project it can't find funcs usages. All text editor integrations
+  # with golangci-lint call it on a directory with the changed file.
+  check-exported: false
+deadcode:
+  # Include test files
+  test: true
+staticcheck:
+  # Include tests in the analysis.
+  tests: true
+depguard:
+  list-type: blacklist
+  include-go-root: false
+  packages:
+    - unsafe
+    - reflect
+    - https://github.com/afex/hystrix-go
+    - reflect: "restricted in general but can be approved in some specific cases"
+funlen:
+  lines: 150
+  statements: 50
+
+issues:
+  # Excluding configuration per-path, per-linter, per-text and per-source
+  exclude-rules:
+    - path: _test\.go
+      linters:
+        - gocyclo
+        - errcheck
+        - dupl
+        - gosec
+        - lll
+        - funlen
+    - linters:
+        - lll
+      source: "^//go:generate "
+    - path: config
+      linters:
+        - lll
+    - linters:
+        - staticcheck
+
+  # Independently from option `exclude` we use default exclude patterns,
+  # it can be disabled by this option. To list all
+  # excluded by default patterns execute `golangci-lint run --help`.
+  # Default value for this option is true.
+  exclude-use-default: false
+
+service:
+  golangci-lint-version: 1.26.x # use the fixed version to not introduce new linters unexpectedly
